@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Shatterline</title>
+
+  <link
+    rel="stylesheet"
+    href="style.css"
+  >
+</head>
+
+<body>
+
+  <div id="game-container">
+
+    <canvas id="game"></canvas>
+
+
+    <!-- ================================================= -->
+    <!-- HUD -->
+    <!-- ================================================= -->
+
+    <div
+      id="hud"
+      class="hidden"
+    >
+
+      <div class="hud-item">
+
+        <span class="hud-label">
+          SURVIVAL
+        </span>
+
+        <span
+          id="timer"
+          class="hud-value"
+        >
+          00:00
+        </span>
+
+      </div>
+
+
+      <div class="hud-item">
+
+        <span class="hud-label">
+          SHOCKWAVE
+        </span>
+
+        <span
+          id="shockwave"
+          class="hud-value"
+        >
+          READY
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- ================================================= -->
+    <!-- MAIN MENU -->
+    <!-- ================================================= -->
+
+    <div
+      id="main-menu"
+      class="overlay"
+    >
+
+      <div class="menu-content">
+
+        <div class="eyebrow">
+          SURVIVAL ON THIN ICE
+        </div>
+
+        <h1>
+          SHATTERLINE
+        </h1>
+
+        <p class="tagline">
+          The ice won't hold forever.
+        </p>
+
+
+        <div class="main-actions">
+
+          <button
+            id="play-button"
+            class="primary-button"
+          >
+            PLAY
+          </button>
+
+          <button
+            id="cosmetics-button"
+            class="secondary-button"
+          >
+            COSMETICS
+          </button>
+
+        </div>
+
+
+        <button
+          id="sound-button"
+          class="secondary-button small-button"
+        >
+          SOUND: ON
+        </button>
+
+
+        <div class="menu-stats">
+
+          <div class="stat-card">
+
+            <span class="stat-label">
+              BEST SURVIVAL
+            </span>
+
+            <span
+              id="best-time"
+              class="stat-value"
+            >
+              00:00
+            </span>
+
+          </div>
+
+
+          <div class="stat-card">
+
+            <span class="stat-label">
+              BEST MEDAL
+            </span>
+
+            <span
+              id="best-medal"
+              class="stat-value"
+            >
+              UNRANKED
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <div class="controls">
+
+          <span>
+            WASD / ARROWS — MOVE
+          </span>
+
+          <span>
+            SPACE — SHOCKWAVE
+          </span>
+
+          <span>
+            ESC — PAUSE
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ================================================= -->
+    <!-- COSMETICS -->
+    <!-- ================================================= -->
+
+    <div
+      id="cosmetics-menu"
+      class="overlay cosmetics-overlay hidden"
+    >
+
+      <div class="cosmetics-panel">
+
+        <div class="cosmetics-header">
+
+          <div>
+
+            <div class="eyebrow">
+              CUSTOMIZE YOUR RUN
+            </div>
+
+            <h2>
+              COSMETICS
+            </h2>
+
+            <p class="cosmetics-description">
+              Survive longer to unlock new styles.
+              Cosmetics do not affect gameplay.
+            </p>
+
+          </div>
+
+
+          <button
+            id="close-cosmetics-button"
+            class="secondary-button close-button"
+          >
+            BACK
+          </button>
+
+        </div>
+
+
+        <!-- Arena -->
+
+        <section class="cosmetic-section">
+
+          <div class="cosmetic-section-heading">
+
+            <div>
+
+              <h3>
+                ARENA
+              </h3>
+
+              <p>
+                Changes the ice sheet and surrounding ocean.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="cosmetic-grid">
+
+            <button
+              class="cosmetic-card"
+              data-category="arena"
+              data-id="arctic"
+            >
+
+              <div
+                class="cosmetic-preview arena-preview"
+                style="
+                  --preview-one:#b4e5f3;
+                  --preview-two:#07304a;
+                "
+              ></div>
+
+              <span class="cosmetic-name">
+                ARCTIC
+              </span>
+
+              <span class="cosmetic-status">
+                DEFAULT
+              </span>
+
+            </button>
+
+
+            <button
+              class="cosmetic-card"
+              data-category="arena"
+              data-id="aurora"
+            >
+
+              <div
+                class="cosmetic-preview arena-preview"
+                style="
+                  --preview-one:#8fffe1;
+                  --preview-two:#755cff;
+                "
+              ></div>
+
+              <span class="cosmetic-name">
+                AURORA
+              </span>
+
+              <span class="cosmetic-status">
+                SURVIVE 01:00
+              </span>
+
+            </button>
+
+
+            <button
+              class="cosmetic-card"
+              data-category="arena"
+              data-id="midnight"
+            >
+
+              <div
+                class="cosmetic-preview arena-preview"
+                style="
+                  --preview-one:#557da5;
+                  --preview-two:#040611;
+                "
+              ></div>
+
+              <span class="cosmetic-name">
+                MIDNIGHT
+              </span>
+
+              <span class="cosmetic-status">
+                SURVIVE 02:00
+              </span>
+
+            </button>
+
+
+            <button
+              class="cosmetic-card"
+              data-category="arena"
+              data-id="ember"
+            >
+
+              <div
+                class="cosmetic-preview arena-preview"
+                style="
+                  --preview-one:#ff9f83;
+                  --preview-two:#45111a;
+                "
+              ></div>
+
+              <span class="cosmetic-name">
+                EMBER ICE
+              </span>
+
+              <span class="cosmetic-status">
+                SURVIVE 03:00
+              </span>
+
+            </button>
+
+          </div>
+
+        </section>
+
+
+        <!-- Player -->
+
+        <section class="cosmetic-section">
+
+          <div class="cosmetic-section-heading">
+
+            <div>
+
+              <h3>
+                PLAYER
+              </h3>
+
+              <p>
+                Changes your character's color and glow.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="cosmetic-grid">
+
+            <button
+              class="cosmetic-card"
+              data-category="player"
+              data-id="glacier"
+            >
+
+              <div
+                class="cosmetic-preview player-preview"
+                style="
+                  --preview-one:#073650;
+                  --preview-two:#5de1ff;
+                "
+              ></div>
+
+              <span class="cosmetic-name">
+                GLACIER
+              </span>
+
+              <span class="cosmetic-status">
+                DEFAULT
+              </span>
+
+            </button>
+
+
+            <button
+              class="cosmetic-card"
+              data-category="player"
+              data-id="rose"
+            >
+
+              <div
+                class="cosmetic-preview player-preview"
+                style="
+                  --preview-one:#541735;
+                  --preview-two:#ff5da8;
+                "
+              ></div>
+
+              <span class="cosmetic-name">
+                ROSE
+              </span>
+
+              <span class="cosmetic-status">
+                SURVIVE 00:30
+              </span>
+
+            </button>
+
+
+            <button
+              class="cosmetic-card"
+              data-category="player"
+              data-id="violet"
+            >
+
+              <div
+                class="cosmetic-preview player-preview"
+                style="
+                  --preview-one:#28164f;
+                  --preview-two:#a27cff;
+                "
+              ></div>
+
+              <span class="cosmetic-name">
+                VIOLET
+              </span>
+
+              <span class="cosmetic-status">
+                SURVIVE 01:00
+              </span>
+
+            </button>
+
+
+            <button
+              class="cosmetic-card"
+              data-category="player"
+              data-id="gold"
+            >
+
+              <div
+                class="cosmetic-preview player-preview"
+                style="
+                  --preview-one:#5c430c;
+                  --preview-two:#ffd96a;
+                "
+              ></div>
+
+              <span class="cosmetic-name">
+                GOLD
+              </span>
+
+              <span class="cosmetic-status">
+                SURVIVE 03:00
+              </span>
+
+            </button>
+
+          </div>
+
+        </section>
+
+
+        <!-- Trail -->
+
+        <section class="cosmetic-section">
+
+          <div class="cosmetic-section-heading">
+
+            <div>
+
+              <h3>
+                TRAIL
+              </h3>
+
+              <p>
+                Changes the energy left behind while moving.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="cosmetic-grid">
+
+            <button
+              class="cosmetic-card"
+              data-category="trail"
+              data-id="frost"
+            >
+
+              <div
+                class="cosmetic-preview trail-preview"
+                style="
+                  --preview-one:#8deaff;
+                  --preview-two:#dfffff;
+                "
+              ></div>
+
+              <span class="cosmetic-name">
+                FROST
+              </span>
+
+              <span class="cosmetic-status">
+                DEFAULT
+              </span>
+
+            </button>
+
+
+            <button
+              class="cosmetic-card"
+              data-category="trail"
+              data-id="aurora"
+            >
+
+              <div
+                class="cosmetic-preview trail-preview"
+                style="
+                  --preview-one:#65ffd7;
+                  --preview-two:#a273ff;
+                "
+              ></div>
+
+              <span class="cosmetic-name">
+                AURORA
+              </span>
+
+              <span class="cosmetic-status">
+                SURVIVE 01:00
+              </span>
+
+            </button>
+
+
+            <button
+              class="cosmetic-card"
+              data-category="trail"
+              data-id="sparks"
+            >
+
+              <div
+                class="cosmetic-preview trail-preview"
+                style="
+                  --preview-one:#ffd451;
+                  --preview-two:#ff6a44;
+                "
+              ></div>
+
+              <span class="cosmetic-name">
+                SPARKS
+              </span>
+
+              <span class="cosmetic-status">
+                SURVIVE 01:30
+              </span>
+
+            </button>
+
+
+            <button
+              class="cosmetic-card"
+              data-category="trail"
+              data-id="void"
+            >
+
+              <div
+                class="cosmetic-preview trail-preview"
+                style="
+                  --preview-one:#9666ff;
+                  --preview-two:#130d28;
+                "
+              ></div>
+
+              <span class="cosmetic-name">
+                VOID
+              </span>
+
+              <span class="cosmetic-status">
+                SURVIVE 02:00
+              </span>
+
+            </button>
+
+          </div>
+
+        </section>
+
+
+        <div class="cosmetics-footer">
+          ESC — BACK
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ================================================= -->
+    <!-- PAUSE -->
+    <!-- ================================================= -->
+
+    <div
+      id="pause-menu"
+      class="overlay hidden"
+    >
+
+      <div class="menu-content pause-content">
+
+        <div class="eyebrow">
+          RUN PAUSED
+        </div>
+
+        <h2>
+          PAUSED
+        </h2>
+
+
+        <div class="pause-buttons">
+
+          <button
+            id="resume-button"
+            class="primary-button"
+          >
+            RESUME
+          </button>
+
+          <button
+            id="restart-button"
+            class="secondary-button"
+          >
+            RESTART
+          </button>
+
+          <button
+            id="pause-menu-button"
+            class="secondary-button"
+          >
+            MAIN MENU
+          </button>
+
+          <button
+            id="pause-sound-button"
+            class="secondary-button"
+          >
+            SOUND: ON
+          </button>
+
+        </div>
+
+
+        <div class="controls">
+
+          <span>
+            ESC — RESUME
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ================================================= -->
+    <!-- GAME OVER -->
+    <!-- ================================================= -->
+
+    <div
+      id="game-over"
+      class="overlay hidden"
+    >
+
+      <div class="menu-content game-over-content">
+
+        <div class="eyebrow">
+          RUN OVER
+        </div>
+
+        <h2
+          id="death-title"
+        >
+          THE ICE GAVE WAY
+        </h2>
+
+
+        <div class="result-time">
+
+          <span>
+            SURVIVAL
+          </span>
+
+          <strong
+            id="final-time"
+          >
+            00:00
+          </strong>
+
+        </div>
+
+
+        <div
+          id="medal-display"
+          class="medal-display"
+        >
+          UNRANKED
+        </div>
+
+
+        <div class="result-row">
+
+          <span>
+            Enemies shattered
+          </span>
+
+          <strong
+            id="final-enemies"
+          >
+            0
+          </strong>
+
+        </div>
+
+
+        <div class="game-over-buttons">
+
+          <button
+            id="retry-button"
+            class="primary-button"
+          >
+            RETRY
+          </button>
+
+          <button
+            id="menu-button"
+            class="secondary-button"
+          >
+            MAIN MENU
+          </button>
+
+        </div>
+
+
+        <div class="controls">
+
+          <span>
+            R — RETRY
+          </span>
+
+          <span>
+            ESC — MENU
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <script src="game.js"></script>
+
+</body>
+
+</html>
